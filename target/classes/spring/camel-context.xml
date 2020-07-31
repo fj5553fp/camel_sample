@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring       https://camel.apache.org/schema/spring/camel-spring.xsd">
+    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+        <route id="main-route">
+            <from id="Main-route" uri="timer:trigger?repeatCount=1"/>
+            <to id="_to2" uri="direct:Route-route1"/>
+            <to id="_to3" uri="direct:Route-route2"/>
+            <to id="_to4" uri="direct:Route-route3"/>
+            <to id="_to5" uri="direct:Route-route4"/>
+            <to id="_to6" uri="direct:Route-route5"/> 
+        </route>
+        <route id="Route-route1">
+            <from id="Route-route11" uri="direct:Route-route1"/>
+            <delay id="_delay1">
+                <constant>10000</constant>
+            </delay>
+            <setBody id="route1-setBody1">
+                <simple>Hello World 1</simple>
+            </setBody>
+            <log id="root1-log1" message=">>> ${body}"/>
+        </route>
+        <route id="Route-route2">
+            <from id="Route-route22" uri="direct:Route-route2"/>
+            <delay id="_delay2">
+                <constant>10000</constant>
+            </delay>
+            <setBody id="route1-setBody2">
+                <simple>Hello World 2</simple>
+            </setBody>
+            <log id="root1-log2" message=">>> ${body}"/>
+        </route>
+        <route id="Route-route3">
+            <from id="Route-route33" uri="direct:Route-route3"/>
+            <log id="_log3" message="Route3 Call"/>
+            <setBody id="Sub-setBody3">
+                <simple>Hello World Sub3</simple>
+            </setBody>
+            <log id="root1-log3" message=">>> ${body}"/>
+        </route>
+        <route id="Route-route4">
+            <from id="Route-route44" uri="direct:Route-route4"/>
+            <loop id="_loop1">
+                <simple>3</simple>
+                <log id="_log2" message="Loop: ${header.CamelLoopIndex}"/>
+            </loop>
+        </route>
+        <route id="Route-route5">
+            <from id="Route-route55" uri="direct:Route-route5"/>
+            <log id="_log4" message="Route5 Call"/>
+            <setBody id="Sub-setBody5">
+                <simple>  Hello World Sub5</simple>
+            </setBody>
+            <log id="root1-log5" message=">>> ${body}"/>
+        </route>
+    </camelContext>
+</beans>
