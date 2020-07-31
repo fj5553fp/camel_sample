@@ -1,10 +1,17 @@
 親ルートから複数の子ルートを呼び出すサンプル。
+
 main：route1～5を呼び出すルート
+
 route1：1秒待って、メッセージ出力
+
 route2：1秒待って、メッセージ出力
+
 route3：メッセージ出力のみ
+
 route4：2回ループして、ループ番号をメッセージ出力
+
 route5：メッセージ出力のみ
+
 
 # Spring-Boot Camel QuickStart
 
